@@ -1,5 +1,4 @@
-# AI Detector for LinkedIn®
-
+<h1 align="center">AI Detector for LinkedIn®</h1>
 <img width="1672" height="941" alt="AI Detector for LinkedIn Showcase" src="https://github.com/user-attachments/assets/3c345ecf-e49a-44ca-ae3e-f58e7eec6e54" />
 
 
