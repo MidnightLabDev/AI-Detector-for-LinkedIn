@@ -59,7 +59,31 @@ AI detection is probabilistic. A result is an estimate, not proof of authorship.
 12. Includes direct setup guides for both API providers inside the popup.
 
 13. Includes a link to the public RAID Benchmark leaderboard for external reference.
+    
+## Installation
 
+1. Download or clone this repository.
+
+2. Open Chrome.
+
+3. Go to `chrome://extensions`.
+
+4. Enable **Developer mode**.
+
+5. Select **Load unpacked**.
+
+6. Choose the extension folder.
+
+7. Open the extension popup.
+
+8. Select Zhuque AI or Winston AI.
+
+9. Add your API key.
+
+10. Configure your detection settings.
+
+11. Open or refresh LinkedIn®.
+    
 ## Supported detectors
 
 ### Zhuque AI
@@ -133,6 +157,7 @@ To change detector provider, first untick **Detector enabled**, then choose the 
 Tencent documentation:
 
 https://cloud.tencent.com/document/product/1552/137539
+
 Direct link to API portal: https://console.tencentcloud.com/edgeone/makers?tab=models&subTab=apikey
 
 ## How to get a Winston AI API key
@@ -154,6 +179,7 @@ Direct link to API portal: https://console.tencentcloud.com/edgeone/makers?tab=m
 Winston developer documentation:
 
 https://docs.gowinston.ai/
+
 Developer Portal: https://dev.gowinston.ai/
 
 ## Minimum words
@@ -189,30 +215,6 @@ The extension can display:
 `Human written`
 
 Only the highest scoring result is shown beside analyzed content.
-
-## Installation
-
-1. Download or clone this repository.
-
-2. Open Chrome.
-
-3. Go to `chrome://extensions`.
-
-4. Enable **Developer mode**.
-
-5. Select **Load unpacked**.
-
-6. Choose the extension folder.
-
-7. Open the extension popup.
-
-8. Select Zhuque AI or Winston AI.
-
-9. Add your API key.
-
-10. Configure your detection settings.
-
-11. Open or refresh LinkedIn®.
 
 ## Troubleshooting
 
