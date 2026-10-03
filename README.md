@@ -1,31 +1,64 @@
-<h1 align="center">AI Detector for LinkedIn®</h1>
+
+
+<div align="center">
+
 <img width="1672" height="941" alt="AI Detector for LinkedIn Showcase" src="https://github.com/user-attachments/assets/3c345ecf-e49a-44ca-ae3e-f58e7eec6e54" />
 
+<h1>AI Detector for LinkedIn®</h1>
 
-A Chrome extension that analyzes visible LinkedIn® posts and comments for signs of AI generated writing.
+<p>Detect AI generated writing directly inside LinkedIn® posts, comments, and replies.</p>
 
-The extension uses a bring your own API key model. You choose the detector, connect your own API key, and the extension sends eligible text only to the provider you selected.
+<p><strong>Bring your own API key. Choose Zhuque AI or Winston AI.</strong></p>
 
-Current version: **0.1**
+<p>Version 0.1</p>
 
-## What it does
+</div>
 
-AI Detector for LinkedIn® adds a small authorship result directly beside eligible LinkedIn® posts and comments while you browse.
+## Preview
 
-For posts, the extension shows the category with the highest returned score and adds a matching visual indicator.
+<div align="center">
 
-For comments and replies, the extension shows only the category with the highest score. Zero percent results are not displayed.
+<img src="https://github.com/user-attachments/assets/1405c497-381f-4852-9440-40aadc1f578d" alt="AI Detector for LinkedIn preview" width="100%">
 
-The extension can analyze:
+</div>
 
-* LinkedIn® feed posts
-* Expanded posts
-* Comments
-* Replies
-* English content
-* Additional languages depending on the selected provider
+## About
 
-A configurable minimum word setting lets you ignore very short text where AI detection is less meaningful.
+AI Detector for LinkedIn® is a Chrome extension that analyzes eligible text while you browse LinkedIn® and displays an AI authorship estimate beside posts, comments, and replies.
+
+The extension uses a bring your own API key model. You choose the detector you want to use and connect your own provider key.
+
+The current release supports Zhuque AI through Tencent EdgeOne Makers and Winston AI through the Winston AI API.
+
+AI detection is probabilistic. A result is an estimate, not proof of authorship.
+
+## Features
+
+1. Detects eligible LinkedIn® posts.
+
+2. Detects comments and replies.
+
+3. Displays the highest scoring result beside analyzed content.
+
+4. Supports Human, AI generated, and Suspected AI results with Zhuque AI.
+
+5. Supports Human and AI generated results with Winston AI.
+
+6. Lets you choose the minimum number of words before analysis begins.
+
+7. Lets you enable or disable post analysis and comment analysis separately.
+
+8. Uses your own provider API key.
+
+9. Stores separate keys for Zhuque AI and Winston AI.
+
+10. Keeps provider selection locked while the detector is enabled to prevent accidental switching.
+
+11. Includes English and Arabic controls when Zhuque AI is selected.
+
+12. Includes direct setup guides for both API providers inside the popup.
+
+13. Includes a link to the public RAID Benchmark leaderboard for external reference.
 
 ## Supported detectors
 
@@ -33,15 +66,17 @@ A configurable minimum word setting lets you ignore very short text where AI det
 
 Zhuque AI is accessed through Tencent EdgeOne Makers using the `@makers/zhuque-text` model.
 
-Zhuque returns three separate categories:
+Tencent documents three text classifications:
 
-* Human
-* AI
-* Suspected AI
+`Human`
 
-This extension keeps those categories separate and displays the highest returned result.
+`AI`
 
-The current build allows English and Arabic text to be sent to Zhuque AI. Tencent documents the Zhuque text endpoint and the three category response format, but its public API page does not publish a specific Arabic accuracy guarantee.
+`Suspected AI`
+
+The extension keeps these classifications separate and displays the category with the highest returned proportion.
+
+The extension currently allows English and Arabic content to be analyzed with Zhuque AI. Tencent documents the text detection API and its classification output, but does not publish a separate Arabic accuracy guarantee on the API page.
 
 Official documentation:
 
@@ -49,32 +84,17 @@ https://cloud.tencent.com/document/product/1552/137539
 
 ### Winston AI
 
-Winston AI is accessed through its v2 AI content detection API.
+Winston AI is accessed through the Winston AI v2 text detection API.
 
-Winston returns a Human Score from 0 to 100. The extension displays that Human score and calculates the AI score as 100 minus the Human score.
+Winston returns a Human Score from 0 to 100. The extension uses that Human Score for the Human result and calculates the AI result as `100 minus Human Score`.
 
-Winston does not return a separate Suspected AI category through this endpoint.
+The Winston v2 API currently documents support for these languages:
 
-Supported Winston AI v2 languages:
+English, French, Spanish, Portuguese, Dutch, German, Polish, Italian, Romanian, Indonesian, Tagalog, Russian, Bulgarian, and Simplified Chinese.
 
-* English
-* French
-* Spanish
-* Portuguese
-* Dutch
-* German
-* Polish
-* Italian
-* Romanian
-* Indonesian
-* Tagalog
-* Russian
-* Bulgarian
-* Simplified Chinese
+Arabic is not currently listed as supported by the Winston v2 text API.
 
-Arabic is not listed as supported by the Winston AI v2 text API.
-
-Winston requires at least 300 characters for a text request. Its documentation also warns that shorter samples can produce less reliable assessments, so the extension skips Winston requests below the API minimum.
+Winston requires at least 300 characters for text analysis. Winston also warns that text under 600 characters may produce unreliable results. The extension therefore respects the Winston API minimum before submitting text.
 
 Official documentation:
 
@@ -82,77 +102,73 @@ https://docs.gowinston.ai/api-reference/v2/ai-content-detection/post
 
 ## Bring your own API key
 
-The extension does not provide shared detector credits.
+This release does not provide shared detector credits.
 
-Each user connects their own API key for either Zhuque AI or Winston AI.
+Each user supplies their own Zhuque AI or Winston AI key.
 
-Keys are stored separately for each provider.
+Only the selected detector receives eligible text.
 
-By default, an API key is kept in the browser session. If you enable **Remember on this device**, the key is stored in local extension storage for that browser profile.
+API keys are kept in the browser session by default. If you choose **Remember on this device**, the selected provider key is stored in local extension storage for that browser profile.
 
-Only the currently selected detector receives eligible LinkedIn® text.
+To change detector provider, first untick **Detector enabled**, then choose the other provider.
 
-To change providers, first untick **Detector enabled**, then select the other provider.
-
-## Getting a Zhuque AI API key
+## How to get a Zhuque AI API key
 
 1. Open Tencent EdgeOne Makers.
-2. Go to Models. 
-3. Open API Key. 
-4. Create an API key. 
-5. Paste the key into the extension popup.
-6. Save the key.
-7. Enable the detector.
 
-Direct Link: https://console.tencentcloud.com/edgeone/makers?tab=models&subTab=apikey
-Tencent EdgeOne documentation:
+2. Open Models.
+
+3. Open API Key.
+
+4. Create an API key.
+
+5. Open the extension popup.
+
+6. Select Zhuque AI.
+
+7. Paste your key.
+
+8. Save the key.
+
+Tencent documentation:
 
 https://cloud.tencent.com/document/product/1552/137539
 
-## Getting a Winston AI API key
+## How to get a Winston AI API key
 
 1. Create a Winston AI developer account.
-2. Open the Winston AI developer dashboard.
-3. Generate an API token.
-4. Paste the token into the extension popup.
-5. Save the key.
-6. Enable the detector.
 
-Winston AI API documentation:
+2. Open the Winston AI developer dashboard.
+
+3. Generate an API token.
+
+4. Open the extension popup.
+
+5. Select Winston AI.
+
+6. Paste your token.
+
+7. Save the key.
+
+Winston developer documentation:
 
 https://docs.gowinston.ai/
-Direct link to Developer Portal: https://dev.gowinston.ai/
-
-## Detection controls
-
-The popup currently includes:
-
-* Detector provider selection
-* Detector enabled toggle
-* Analyze posts toggle
-* Analyze comments toggle
-* Minimum word setting
-* Provider specific API key storage
-* Remember on this device option
-* API key setup guidance
-* RAID Benchmark reference
-* Page diagnostics for comment detection
 
 ## Minimum words
 
-Very short text can produce misleading detector results because there may not be enough writing signal to evaluate.
+Short text can give an AI detector too little writing signal to assess reliably.
 
-The extension lets you choose the minimum number of words required before text is submitted for detection.
+The extension includes a configurable minimum word setting.
 
-If a post or comment is shorter than the configured threshold, it is skipped and no detector request is made.
+If a post, comment, or reply contains fewer words than your selected minimum, it is skipped and no detection request is made.
 
-Winston AI also has its own API requirement of at least 300 characters, which is enforced separately.
+Winston AI also has its own minimum text requirement of 300 characters. That requirement applies even if your selected word minimum has already been reached.
 
-## Result display
+## Result labels
 
 ### Zhuque AI
 
-Possible results are:
+The extension can display:
 
 `AI generated`
 
@@ -160,96 +176,151 @@ Possible results are:
 
 `Human written`
 
-The category with the highest returned proportion is displayed.
+Only the highest scoring result is shown beside analyzed content.
 
 ### Winston AI
 
-Possible results are:
+The extension can display:
 
 `AI generated`
 
 `Human written`
 
-The extension uses Winston AI's Human Score as the Human result and calculates the AI result as its inverse.
+Only the highest scoring result is shown beside analyzed content.
+
+## Installation
+
+1. Download or clone this repository.
+
+2. Open Chrome.
+
+3. Go to `chrome://extensions`.
+
+4. Enable **Developer mode**.
+
+5. Select **Load unpacked**.
+
+6. Choose the extension folder.
+
+7. Open the extension popup.
+
+8. Select Zhuque AI or Winston AI.
+
+9. Add your API key.
+
+10. Configure your detection settings.
+
+11. Open or refresh LinkedIn®.
+
+## Troubleshooting
+
+### Analysis failed after the first run
+
+If the extension shows **Analysis failed** after the first run, refresh the LinkedIn® page and try again.
+
+In most cases, refreshing the page allows analysis to start normally.
+
+### No result appears
+
+Check that **Detector enabled** is selected.
+
+Check that the correct API key is saved for the selected provider.
+
+Check that **Analyze posts** or **Analyze comments** is enabled for the content you are testing.
+
+Check that the text meets your configured minimum word setting.
+
+If Winston AI is selected, the text must also meet Winston's minimum of 300 characters.
+
+### Cannot change provider
+
+Untick **Detector enabled** first.
+
+The provider controls are intentionally locked while detection is active.
+
+### Comments are not detected
+
+Expand the comments on LinkedIn® first.
+
+You can also use **Check this page** inside the extension popup to inspect comment detection status.
 
 ## Privacy
 
-The extension does not run its own analytics or inference server.
+The current BYOK build does not operate its own AI inference server.
 
-When detection is enabled, eligible visible post or comment body text is sent directly from the extension to the selected detector.
+Eligible visible post, comment, or reply text is sent directly from the extension to the detector selected by the user.
 
-The extension is designed not to send profile headers, profile URLs, images, private messages, connections, or LinkedIn® account details. Personal information written inside a post or comment can still be part of the submitted text.
+The extension is designed not to send images, private messages, profile URLs, or connection lists for AI analysis. Personal information contained inside the text of a post or comment may still be part of the submitted text.
 
-Raw LinkedIn® text is kept only while a request is being processed. Local caches use text hashes and detector results rather than a permanent archive of post content.
+Raw LinkedIn® text is used while the request is processed. Local result caching is designed around hashes and detector results rather than creating a permanent archive of LinkedIn® post content.
 
 Provider data handling is governed by the provider you choose.
 
-Do not use the extension with sensitive content unless you are comfortable with the selected provider's terms and privacy practices.
+Review the privacy and data terms of Tencent EdgeOne or Winston AI before submitting sensitive content.
 
-## Security notes
+## API key security
 
-Never publish your personal API key in the repository.
+Do not commit your personal API key to this repository.
 
-Never hard code an API key into the extension source.
+Do not hard code your API key into the extension source.
 
-If you fork this project, keep credentials out of commits, screenshots, issue reports, and test files.
+Do not include real API keys in screenshots, issues, pull requests, sample configuration files, or test files.
 
-The current build uses Chrome Manifest V3 and requests access only to LinkedIn®, Tencent EdgeOne, Winston AI, and Chrome storage as required by its current functionality.
+The public repository should never contain provider credentials.
 
 ## RAID Benchmark
 
-The popup includes a link to the public RAID Benchmark leaderboard as an external reference for comparing AI text detection systems.
+The extension includes a link to the public RAID Benchmark leaderboard as an external reference for AI text detection systems.
 
-No leaderboard position is claimed by this project. Rankings and model versions can change, and benchmark results do not guarantee the same performance on LinkedIn® posts, comments, languages, or writing styles.
+This project does not claim a fixed leaderboard position for any provider.
+
+Leaderboard positions, detector versions, benchmark configurations, and results can change.
 
 RAID leaderboard:
 
 https://raid-bench.xyz/leaderboard
 
-RAID project:
+## Limitations
 
-https://raid-bench.xyz/
+AI text detection cannot establish authorship with certainty.
 
-## Important limitations
+Results can be affected by text length, rewriting, translation, paraphrasing, human editing, AI editing, mixed authorship, language support, model updates, and changes to LinkedIn® page structure.
 
-AI text detection is probabilistic.
+The extension currently analyzes text only.
 
-A result is an estimate, not proof of authorship.
+Images, audio, and video are not analyzed.
 
-Results can be affected by:
+## Platform notice
 
-* Very short text
-* Human edited AI text
-* AI edited human text
-* Translation
-* Paraphrasing
-* Mixed human and AI authorship
-* Unusual formatting
-* Unsupported languages
-* Changes to LinkedIn® page structure
-* Changes to provider models
+LinkedIn publishes rules concerning browser extensions and third party software that scrape content, modify the LinkedIn experience, or automate activity.
 
-The extension currently analyzes text only. Images and videos are not analyzed.
+Users and distributors of this project should review the current LinkedIn User Agreement and LinkedIn Help guidance before using or publishing the extension.
 
-## Installation for testing
+LinkedIn prohibited software and extensions guidance:
 
-1. Download or clone this repository.
-2. Open Chrome.
-3. Go to `chrome://extensions`.
-4. Enable Developer mode.
-5. Click **Load unpacked**.
-6. Select the extension folder.
-7. Open the extension popup.
-8. Choose Zhuque AI or Winston AI.
-9. Add your API key.
-10. Configure the detector.
-11. Open or refresh LinkedIn®.
+https://www.linkedin.com/help/linkedin/answer/a1341387/prohibited-software-and-extensions
 
 ## Project status
 
-Version 0.1 is an experimental build intended for testing detector behavior on LinkedIn® posts and comments.
+Version 0.1 is an experimental public release.
 
-The extension interface and provider integrations may change as testing continues.
+The extension interface, LinkedIn® selectors, provider integrations, scoring presentation, and supported features may change as testing continues.
+
+Bug reports and reproducible test cases are welcome.
+
+## License
+
+This project is source available under the PolyForm Noncommercial License 1.0.0.
+
+Noncommercial use, modification, and redistribution are permitted under the license terms.
+
+Commercial use is not permitted without separate written permission from the copyright holder.
+
+See the `LICENSE` file for the full terms.
+
+Official license:
+
+https://polyformproject.org/licenses/noncommercial/1.0.0
 
 ## Trademark and independence
 
@@ -257,19 +328,9 @@ LinkedIn® is a registered trademark of LinkedIn Corporation and its affiliates.
 
 This project is independent and is not affiliated with, sponsored by, or endorsed by LinkedIn Corporation, Tencent, EdgeOne, Zhuque AI, or Winston AI.
 
-Provider names and trademarks belong to their respective owners.
+All provider names, product names, and trademarks belong to their respective owners.
 
-## Platform notice
-
-LinkedIn publishes rules concerning browser extensions, automated activity, scraping, and software that modifies the LinkedIn experience.
-
-Anyone distributing or using this project should review the current LinkedIn terms and policies before use or publication.
-
-LinkedIn help and policies:
-
-https://www.linkedin.com/help/linkedin/
-
-## Sources
+## References
 
 Tencent EdgeOne Zhuque AI documentation:
 
@@ -283,6 +344,14 @@ RAID Benchmark:
 
 https://raid-bench.xyz/
 
+PolyForm Noncommercial License 1.0.0:
+
+https://polyformproject.org/licenses/noncommercial/1.0.0
+
+LinkedIn prohibited software and extensions guidance:
+
+https://www.linkedin.com/help/linkedin/answer/a1341387/prohibited-software-and-extensions
+
 Chrome extension documentation:
 
 https://developer.chrome.com/docs/extensions/
@@ -292,13 +361,3 @@ https://developer.chrome.com/docs/extensions/
 Created by **Mayas Ötegen**
 
 https://www.midnightlab.dev/
-
-## License
-
-This project is source available under the PolyForm Noncommercial License 1.0.0.
-
-Noncommercial use, modification, and redistribution are permitted under the license terms. Commercial use is not permitted without separate written permission from the copyright holder.
-
-See the `LICENSE` file for the full terms.
-
-For commercial licensing inquiries, contact the project owner.
