@@ -1,16 +1,16 @@
 
 
 <div align="center">
-
-<img width="1672" height="941" alt="AI Detector for LinkedIn Showcase" src="https://github.com/user-attachments/assets/3c345ecf-e49a-44ca-ae3e-f58e7eec6e54" />
-
 <h1>AI Detector for LinkedIn®</h1>
-
-<p>Detect AI generated writing directly inside LinkedIn® posts, comments, and replies.</p>
+  <p>Detect AI generated writing directly inside LinkedIn® posts, comments, and replies.</p>
 
 <p><strong>Bring your own API key. Choose Zhuque AI or Winston AI.</strong></p>
 
 <p>Version 0.1</p>
+<img width="1672" height="941" alt="AI Detector for LinkedIn Showcase" src="https://github.com/user-attachments/assets/3c345ecf-e49a-44ca-ae3e-f58e7eec6e54" />
+
+
+
 
 </div>
 
