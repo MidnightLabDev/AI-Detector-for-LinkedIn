@@ -1,0 +1,49 @@
+{
+  "manifest_version": 3,
+  "name": "AI Detector for LinkedIn®",
+  "short_name": "AI Detector",
+  "version": "0.1",
+  "version_name": "0.1 BYOK",
+  "minimum_chrome_version": "114",
+  "description": "AI text detection for LinkedIn® posts and comments using your own Zhuque AI or Winston AI API key.",
+  "author": "Mayas Ötegen",
+  "homepage_url": "https://www.midnightlab.dev/",
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://www.linkedin.com/*",
+    "https://ai-gateway.edgeone.link/*",
+    "https://api.gowinston.ai/*"
+  ],
+  "background": {
+    "service_worker": "background.mjs",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "AI Detector for LinkedIn®"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.linkedin.com/*"
+      ],
+      "js": [
+        "dom/extract.js",
+        "dom/render.js",
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "16": "icons/16.png",
+    "32": "icons/32.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'none'; base-uri 'none'; connect-src 'self' https://ai-gateway.edgeone.link https://api.gowinston.ai"
+  }
+}

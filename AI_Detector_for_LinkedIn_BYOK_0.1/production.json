@@ -1,0 +1,15 @@
+{
+  "schema_version": 2,
+  "providers": {
+    "zhuque": {
+      "provider": "zhuque-text",
+      "model": "@makers/zhuque-text",
+      "scoring_version": "zhuque_three_labels_v1"
+    },
+    "winston": {
+      "provider": "winston-v2",
+      "model": "Winston AI v2 latest",
+      "scoring_version": "winston_human_score_v1"
+    }
+  }
+}
