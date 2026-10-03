@@ -133,6 +133,7 @@ To change detector provider, first untick **Detector enabled**, then choose the 
 Tencent documentation:
 
 https://cloud.tencent.com/document/product/1552/137539
+Direct link to API portal: https://console.tencentcloud.com/edgeone/makers?tab=models&subTab=apikey
 
 ## How to get a Winston AI API key
 
@@ -153,6 +154,7 @@ https://cloud.tencent.com/document/product/1552/137539
 Winston developer documentation:
 
 https://docs.gowinston.ai/
+Developer Portal: https://dev.gowinston.ai/
 
 ## Minimum words
 
@@ -216,7 +218,7 @@ Only the highest scoring result is shown beside analyzed content.
 
 ### Analysis failed after the first run
 
-If the extension shows **Analysis failed** after the first run, refresh the LinkedIn® page and try again.
+If the extension shows **Analysis failed** after the first run, refresh the LinkedIn® page.
 
 In most cases, refreshing the page allows analysis to start normally.
 
