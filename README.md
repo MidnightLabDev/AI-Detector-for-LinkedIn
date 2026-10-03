@@ -97,13 +97,14 @@ To change providers, first untick **Detector enabled**, then select the other pr
 ## Getting a Zhuque AI API key
 
 1. Open Tencent EdgeOne Makers.
-2. Go to Models.
-3. Open API Key.
-4. Create an API key.
+2. Go to Models. 
+3. Open API Key. 
+4. Create an API key. 
 5. Paste the key into the extension popup.
 6. Save the key.
 7. Enable the detector.
 
+Direct Link: https://console.tencentcloud.com/edgeone/makers?tab=models&subTab=apikey
 Tencent EdgeOne documentation:
 
 https://cloud.tencent.com/document/product/1552/137539
@@ -120,6 +121,7 @@ https://cloud.tencent.com/document/product/1552/137539
 Winston AI API documentation:
 
 https://docs.gowinston.ai/
+Direct link to Developer Portal: https://dev.gowinston.ai/
 
 ## Detection controls
 
