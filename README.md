@@ -142,7 +142,7 @@ To change detector provider, first untick **Detector enabled**, then choose the 
 
 2. Open Models.
 
-3. Open API Key.
+3. Open API Key: https://console.tencentcloud.com/edgeone/makers?tab=models&subTab=apikey
 
 4. Create an API key.
 
@@ -158,13 +158,11 @@ Tencent documentation:
 
 https://cloud.tencent.com/document/product/1552/137539
 
-Direct link to API portal: https://console.tencentcloud.com/edgeone/makers?tab=models&subTab=apikey
-
 ## How to get a Winston AI API key
 
 1. Create a Winston AI developer account.
 
-2. Open the Winston AI developer dashboard.
+2. Open the Winston AI developer dashboard: https://dev.gowinston.ai/
 
 3. Generate an API token.
 
@@ -179,8 +177,6 @@ Direct link to API portal: https://console.tencentcloud.com/edgeone/makers?tab=m
 Winston developer documentation:
 
 https://docs.gowinston.ai/
-
-Developer Portal: https://dev.gowinston.ai/
 
 ## Minimum words
 
