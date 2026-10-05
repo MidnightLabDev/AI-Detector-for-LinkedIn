@@ -1,46 +1,58 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Privacy, providers and limitations</title><style>body{max-width:780px;margin:60px auto;padding:0 24px;font:16px/1.7 system-ui;color:#263b40}h1,h2{line-height:1.3}h2{margin-top:30px;font-size:20px}a{color:#285d61}.note{padding:14px 16px;background:#f4f7f5;border:1px solid #dce5e0;border-radius:10px}</style></head><body>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Privacy and limitations</title>
+  <style>
+    body{max-width:780px;margin:60px auto;padding:0 24px;font:16px/1.7 system-ui;color:#263b40}
+    h1,h2{line-height:1.3}
+    h2{margin-top:30px;font-size:20px}
+    a{color:#285d61}
+    .note{padding:14px 16px;background:#f4f7f5;border:1px solid #dce5e0;border-radius:10px}
+  </style>
+</head>
+<body>
 <h1>AI Detector for LinkedIn®</h1>
-<p>An independent browser extension by Mayas Ötegen. You choose the detector and provide your own API key.</p>
+<p>An independent browser extension by <a href="https://www.linkedin.com/in/mayasotegen/" target="_blank" rel="noopener">Mayas Ötegen</a>. You provide your own Zhuque AI API key.</p>
 
-<h2>Selected detector</h2>
-<p>The extension supports Zhuque AI through Tencent EdgeOne and Winston AI through the Winston developer API. Only the detector selected in the popup receives eligible text. Switching providers stops waiting work from the previous provider and uses the key saved for the newly selected provider.</p>
+<h2>Detector</h2>
+<p>This release uses Zhuque AI through Tencent EdgeOne. Eligible LinkedIn® text is sent only to the Zhuque AI endpoint configured by the extension.</p>
 
 <h2>Text sent for detection</h2>
-<p>When detection is enabled, the extension extracts eligible visible post and comment body text from supported LinkedIn® pages and sends that text to the selected provider for inference. The minimum word setting is applied before a request is made. The extension is designed to send the post or comment body, not profile headers, images, profile URLs, private messages, connections or account details. Personal information written inside a post or comment can still be included in the text sent to the selected provider.</p>
+<p>When detection is enabled, the extension extracts eligible visible post and comment body text from supported LinkedIn® pages and sends that text to Zhuque AI for inference. The minimum word setting is applied before a request is made. The extension is designed to send the post or comment body, not profile headers, images, profile URLs, private messages, connections or account details. Personal information written inside a post or comment can still be included in the text sent to Zhuque AI.</p>
 
-<h2>Your API keys</h2>
-<p>Zhuque and Winston AI keys are stored separately. Session storage is the default. If you choose Remember on this device, that provider key is saved in the local storage of this browser profile. Chrome local storage is not an encrypted password vault. Provider keys are not sent to LinkedIn®, returned to the content script, placed in Chrome sync or sent to another detector. Remove key clears the stored key for the selected provider.</p>
+<h2>Your API key</h2>
+<p>Session storage is the default. If you choose Remember on this device, your Zhuque AI key is saved in the local storage of this browser profile. Chrome local storage is not an encrypted password vault. The API key is not sent to LinkedIn®, returned to the content script, placed in Chrome sync or sent to an additional AI detector. Remove key clears the stored Zhuque AI key.</p>
 
 <h2>Local extension data</h2>
-<p>Preferences and provider connection records are stored locally. Up to 1,000 text hashes and model results, request counters, and up to 1,000 timing samples can remain in extension session storage. Raw page text is kept in working memory while a request is being handled. This extension does not operate a separate analytics or inference server.</p>
+<p>Preferences and the Zhuque connection record are stored locally. Up to 1,000 text hashes and model results, request counters, and up to 1,000 timing samples can remain in extension session storage. Raw page text is kept in working memory while a request is being handled. This extension does not operate a separate analytics or inference server.</p>
 <p>Check this page reads local detection counts and reason codes from the active LinkedIn® tab. It does not itself send an inference request and does not return an API key, post body text, comment body text, author details or page URL to the popup.</p>
 
 <h2>Zhuque AI results</h2>
-<p>Zhuque returns three proportions: Human, AI and Suspected AI. The extension keeps all three categories separate and displays the category with the highest returned proportion. In this extension Zhuque detection is restricted to text that Chrome reliably identifies as English. Text that cannot be reliably confirmed as English is skipped and is not sent to Zhuque.</p>
-
-<h2>Winston AI results</h2>
-<p>Winston AI v2 returns a Human Score from 0 to 100. The extension displays that value as Human and calculates the displayed AI value as 100 minus the Human Score. Winston does not return a separate Suspected AI category through this endpoint, so Winston results show only AI and Human.</p>
-<p>According to the Winston v2 API documentation, supported languages are English, French, Spanish, Portuguese, Dutch, German, Polish, Italian, Romanian, Indonesian, Tagalog, Russian, Bulgarian and Simplified Chinese. Arabic is not listed as supported by the Winston v2 text API. Winston requires at least 300 characters for text input and warns that text below 600 characters may produce unreliable results. The extension therefore skips Winston requests below 300 characters even if the minimum word setting is lower.</p>
+<p>Zhuque returns three proportions: Human, AI and Suspected AI. The extension keeps all three categories separate and displays the category with the highest returned proportion.</p>
+<p>In this extension, Zhuque detection is restricted to text that Chrome reliably identifies as English. Text that cannot be reliably confirmed as English is skipped and is not sent to Zhuque.</p>
 
 <h2>Provider data handling</h2>
-<p>Text sent to a provider is subject to that provider's current service terms and privacy practices. Winston states that text submitted through its API is private, encrypted, not shared with other organizations and not used to retrain its model. Review the current provider documentation before using either service with sensitive content.</p>
+<p>Text sent to Zhuque AI is subject to Tencent EdgeOne's current service terms and privacy practices. Review the current Tencent documentation before using the extension with sensitive content.</p>
 
 <h2>RAID Benchmark</h2>
-<p class="note">The popup includes a link to the public RAID leaderboard as an external benchmark reference. The extension does not state or guarantee a particular leaderboard position. Rankings and model versions can change over time, and benchmark performance does not guarantee the same result on LinkedIn® posts, comments, every language or every writing style.</p>
+<p class="note">The popup includes a link to the public RAID leaderboard as an external benchmark reference. The extension does not state or guarantee a particular leaderboard position. Rankings and model versions can change over time, and benchmark performance does not guarantee the same result on LinkedIn® posts, comments or every writing style.</p>
 
 <h2>General limitations</h2>
-<p>AI text detection is probabilistic. Results can be wrong, especially for short text, translated material, heavily edited text, mixed human and AI writing, unusual formatting or content outside a detector's supported languages. A result should not be treated as proof that a particular person did or did not write a piece of text. LinkedIn® page layouts can also change. Images and videos are not analyzed.</p>
+<p>AI text detection is probabilistic. Results can be wrong, especially for short text, translated material, heavily edited text, mixed human and AI writing, unusual formatting or content outside the supported language. A result should not be treated as proof that a particular person did or did not write a piece of text. LinkedIn® page layouts can also change. Images and videos are not analyzed.</p>
 
 <h2>LinkedIn® trademark and platform terms</h2>
 <p>LinkedIn® is a registered trademark of LinkedIn Corporation and its affiliates. This independent product is not affiliated with, sponsored by, or endorsed by LinkedIn Corporation or its affiliates.</p>
 <p>LinkedIn publishes restrictions on some third party browser extensions that scrape, automate or modify the appearance of its service. Users and distributors should review LinkedIn's current terms and browser extension policy before use or publication.</p>
 
 <h2>Sources</h2>
-<p><a href="https://cloud.tencent.com/document/product/1552/137539">Tencent EdgeOne Zhuque AI documentation</a><br>
-<a href="https://docs.gowinston.ai/api-reference/v2/ai-content-detection/post">Winston AI v2 text detection documentation</a><br>
-<a href="https://gowinston.ai/ai-content-detection-api/">Winston AI developer API information</a><br>
+<p>
+<a href="https://cloud.tencent.com/document/product/1552/137539">Tencent EdgeOne Zhuque AI documentation</a><br>
 <a href="https://raid-bench.xyz/leaderboard">RAID Benchmark leaderboard</a><br>
 <a href="https://developer.chrome.com/docs/extensions/reference/api/storage">Chrome storage documentation</a><br>
 <a href="https://brand.linkedin.com/business-books-and-media-usage">LinkedIn® brand guidelines</a><br>
-<a href="https://www.linkedin.com/help/lms/answer/a1341387">LinkedIn® browser extension policy</a></p>
-</body></html>
+<a href="https://www.linkedin.com/help/lms/answer/a1341387">LinkedIn® browser extension policy</a>
+</p>
+</body>
+</html>

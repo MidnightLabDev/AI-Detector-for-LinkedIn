@@ -8,61 +8,64 @@
   <script src="popup.mjs" type="module"></script>
 </head>
 <body>
-  <header><img class="header-logo" src="popup-header-icon.png" alt="AI Detector icon"><div><strong>AI Detector</strong><small>for LinkedIn®</small></div><span class="solo">BYOK</span></header>
-  <p class="intro hero-intro">Choose an AI detector and use your own API key</p>
+  <header>
+    <img class="header-logo" src="popup-header-icon.png" alt="AI Detector icon">
+    <div><strong>AI Detector</strong><small>for LinkedIn®</small></div>
+    <span class="solo">BYOK</span>
+  </header>
 
-  <section class="provider-section" aria-labelledby="providerTitle">
-    <strong id="providerTitle" class="section-title">Detector</strong>
-    <div class="provider-options">
-      <label class="provider-card" for="providerZhuque">
-        <span class="provider-top"><input type="radio" name="provider" id="providerZhuque" value="zhuque"><b>Zhuque AI</b></span>
-        <small>English only in this extension</small>
-        <em id="zhuqueState">No key</em>
-      </label>
-      <label class="provider-card" for="providerWinston">
-        <span class="provider-top"><input type="radio" name="provider" id="providerWinston" value="winston"><b>Winston AI</b></span>
-        <small>14 languages through the v2 API</small>
-        <em id="winstonState">No key</em>
-      </label>
+  <p class="intro hero-intro">Use your own Zhuque AI API key</p>
+
+  <section class="provider-single" aria-label="Detector">
+    <div class="provider-single-top">
+      <strong>Zhuque AI</strong>
+      <span>English only</span>
     </div>
-    <p id="providerLockNote" class="provider-lock" hidden>To change provider, untick Detector enabled first.</p>
+    <small>Human, Suspected AI and AI generated detection through Tencent EdgeOne.</small>
   </section>
 
-  <section class="key"><form id="keyForm">
-    <label for="apiKey" id="apiKeyLabel">API key</label>
-    <input id="apiKey" type="password" maxlength="4096" placeholder="Paste your API key" autocomplete="off" spellcheck="false" autocapitalize="off">
-    <label class="remember"><input id="remember" type="checkbox">Remember on this device</label>
-    <div class="actions"><button id="connect" type="submit">Save key</button><button class="plain" id="remove" type="button" hidden>Remove key</button></div>
-  </form><small id="connection">No key saved</small></section>
+  <section class="key">
+    <form id="keyForm">
+      <label for="apiKey">Tencent EdgeOne API key</label>
+      <input id="apiKey" type="password" maxlength="4096" placeholder="Paste your EdgeOne API key" autocomplete="off" spellcheck="false" autocapitalize="off">
+      <label class="remember"><input id="remember" type="checkbox">Remember on this device</label>
+      <div class="actions">
+        <button id="connect" type="submit">Save key</button>
+        <button class="plain" id="remove" type="button" hidden>Remove key</button>
+      </div>
+    </form>
+    <small id="connection">No Zhuque key saved</small>
+  </section>
 
-  <details class="guide" id="zhuqueGuide">
-    <summary>How to get a Zhuque key</summary>
+  <details class="guide">
+    <summary>How to get a Zhuque AI key</summary>
     <p>Open Tencent EdgeOne Makers. Go to Models, then API Key. Create a key and paste it above.</p>
-    <div class="guide-links"><a href="https://cloud.tencent.com/document/product/1552/137539" target="_blank" rel="noopener">Zhuque setup guide</a><a href="https://console.cloud.tencent.com/edgeone" target="_blank" rel="noopener">Tencent EdgeOne console</a></div>
-  </details>
-
-  <details class="guide" id="winstonGuide" hidden>
-    <summary>How to get a Winston AI key</summary>
-    <p>Create a developer account, open the Winston AI developer dashboard, generate an API token, then paste it above.</p>
-    <p class="provider-note">The key is checked on the first eligible scan so setup alone does not consume Winston credits.</p>
-    <div class="guide-links"><a href="https://dev.gowinston.ai" target="_blank" rel="noopener">Winston developer dashboard</a><a href="https://docs.gowinston.ai/api-reference/v2/ai-content-detection/post" target="_blank" rel="noopener">Winston API documentation</a></div>
-    <p class="language-list"><b>Supported by the Winston v2 text API:</b> English, French, Spanish, Portuguese, Dutch, German, Polish, Italian, Romanian, Indonesian, Tagalog, Russian, Bulgarian, and Simplified Chinese.</p>
-    <p class="provider-note"><b>Arabic is not listed as supported by the Winston v2 API.</b> Winston requires at least 300 characters and warns that text under 600 characters may be unreliable.</p>
+    <div class="guide-links">
+      <a href="https://cloud.tencent.com/document/product/1552/137539" target="_blank" rel="noopener">Zhuque setup guide</a>
+      <a href="https://console.cloud.tencent.com/edgeone" target="_blank" rel="noopener">Tencent EdgeOne console</a>
+    </div>
   </details>
 
   <p id="notice" role="status" aria-live="polite"></p>
 
-  <fieldset id="controls"><legend>Detection</legend>
+  <fieldset id="controls">
+    <legend>Detection</legend>
     <label class="row main"><span>Detector enabled</span><input type="checkbox" id="enabled"></label>
     <label class="row"><span>Analyze posts</span><input type="checkbox" id="posts"></label>
     <label class="row"><span>Analyze comments</span><input type="checkbox" id="comments"></label>
-    <label class="row"><span><span class="setting-title">Minimum words</span><small class="setting-help">Skip shorter posts and comments</small></span><span class="word-control"><input type="number" id="minWords" min="1" max="100" step="1" inputmode="numeric"><small>words</small></span></label>
-    <div id="zhuqueLanguages" class="language-settings">
-      <small class="setting-help">Zhuque is restricted to reliably detected English</small>
+    <label class="row">
+      <span>
+        <span class="setting-title">Minimum words</span>
+        <small class="setting-help">Skip shorter posts and comments</small>
+      </span>
+      <span class="word-control">
+        <input type="number" id="minWords" min="1" max="100" step="1" inputmode="numeric">
+        <small>words</small>
+      </span>
+    </label>
+    <div class="language-settings">
+      <small class="setting-help">Zhuque is restricted to text reliably detected as English.</small>
       <div class="languages"><label><input type="checkbox" id="en">English</label></div>
-    </div>
-    <div id="winstonLanguages" class="language-settings" hidden>
-      <small class="setting-help">Winston detects its supported API languages automatically.</small>
     </div>
   </fieldset>
 
@@ -73,12 +76,20 @@
   </section>
 
   <section class="page-check" aria-labelledby="pageCheckTitle">
-    <div class="check-heading"><strong id="pageCheckTitle">Comment detection</strong><button id="checkPage" type="button" class="plain">Check this page</button></div>
+    <div class="check-heading">
+      <strong id="pageCheckTitle">Comment detection</strong>
+      <button id="checkPage" type="button" class="plain">Check this page</button>
+    </div>
     <p id="pageStatus" role="status" aria-live="polite">Expand comments on LinkedIn®, then check their status here.</p>
     <p id="pageCounts" hidden></p>
   </section>
 
-  <p class="footnote">Results are model estimates, not proof. Only the selected detector receives eligible LinkedIn® post and comment text.</p>
-  <p class="footnote">API keys stay in the browser session unless you choose Remember on this device. Each provider has its own saved key.</p>
-  <footer><a href="privacy.html" target="_blank" rel="noopener">Privacy, providers and limitations</a><span>0.1</span></footer>
-</body></html>
+  <p class="footnote">Results are model estimates, not proof. Eligible English LinkedIn® post and comment text is sent to Zhuque AI for detection.</p>
+  <p class="footnote">Your API key stays in the browser session unless you choose Remember on this device.</p>
+
+  <footer>
+    <a href="privacy.html" target="_blank" rel="noopener">Privacy and limitations</a>
+    <span>0.1</span>
+  </footer>
+</body>
+</html>
