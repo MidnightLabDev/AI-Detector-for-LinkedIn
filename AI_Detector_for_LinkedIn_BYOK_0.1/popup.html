@@ -16,7 +16,7 @@
     <div class="provider-options">
       <label class="provider-card" for="providerZhuque">
         <span class="provider-top"><input type="radio" name="provider" id="providerZhuque" value="zhuque"><b>Zhuque AI</b></span>
-        <small>English and Arabic in this extension</small>
+        <small>English only in this extension</small>
         <em id="zhuqueState">No key</em>
       </label>
       <label class="provider-card" for="providerWinston">
@@ -58,8 +58,8 @@
     <label class="row"><span>Analyze comments</span><input type="checkbox" id="comments"></label>
     <label class="row"><span><span class="setting-title">Minimum words</span><small class="setting-help">Skip shorter posts and comments</small></span><span class="word-control"><input type="number" id="minWords" min="1" max="100" step="1" inputmode="numeric"><small>words</small></span></label>
     <div id="zhuqueLanguages" class="language-settings">
-      <small class="setting-help">Zhuque languages enabled in this extension</small>
-      <div class="languages"><label><input type="checkbox" id="en">English</label><label lang="ar" dir="rtl"><input type="checkbox" id="ar">العربية</label></div>
+      <small class="setting-help">Zhuque is restricted to reliably detected English</small>
+      <div class="languages"><label><input type="checkbox" id="en">English</label></div>
     </div>
     <div id="winstonLanguages" class="language-settings" hidden>
       <small class="setting-help">Winston detects its supported API languages automatically.</small>

@@ -16,7 +16,7 @@
 <p>Check this page reads local detection counts and reason codes from the active LinkedIn® tab. It does not itself send an inference request and does not return an API key, post body text, comment body text, author details or page URL to the popup.</p>
 
 <h2>Zhuque AI results</h2>
-<p>Zhuque returns three proportions: Human, AI and Suspected AI. The extension keeps all three categories separate. Posts show the category with the highest returned proportion. Comments show all three percentages. In this extension Zhuque detection is enabled for English and Arabic.</p>
+<p>Zhuque returns three proportions: Human, AI and Suspected AI. The extension keeps all three categories separate and displays the category with the highest returned proportion. In this extension Zhuque detection is restricted to text that Chrome reliably identifies as English. Text that cannot be reliably confirmed as English is skipped and is not sent to Zhuque.</p>
 
 <h2>Winston AI results</h2>
 <p>Winston AI v2 returns a Human Score from 0 to 100. The extension displays that value as Human and calculates the displayed AI value as 100 minus the Human Score. Winston does not return a separate Suspected AI category through this endpoint, so Winston results show only AI and Human.</p>

@@ -69,7 +69,7 @@
     while (active < 2 && pending.length) {
       const r = pending.shift(), version = r.version, text = r.text;
       r.status = 'loading'; r.attempts++; r.requestId = session + '_' + (++counter); active++;
-      render(r, {status: 'pending', language: /\p{Script=Arabic}/u.test(text) ? 'ar' : 'en'});
+      render(r, {status: 'pending', language: 'en'});
       send({type: 'CLASSIFY', text, kind: r.kind, requestId: r.requestId}).then(result => {
         if (r.version !== version || records.get(r.root) !== r || !eligible(r) || !r.node.isConnected || dom.read(r.node) !== text) return;
         r.requestId = null;

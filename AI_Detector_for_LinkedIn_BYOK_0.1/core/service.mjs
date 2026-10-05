@@ -5,11 +5,11 @@ import {distributionPercentages, percentages} from './probability.mjs';
 import {normalizeText, hashText, tokenCount, detectedLanguage, normalizeLanguage, supportedPath, TEXT_VERSION, MAX_TEXT} from './text.mjs';
 
 const PROVIDERS = Object.freeze({
-  zhuque: {id: 'zhuque', provider: 'zhuque-text', label: 'Zhuque AI', model: ZHUQUE_MODEL, languages: ['en', 'ar']},
+  zhuque: {id: 'zhuque', provider: 'zhuque-text', label: 'Zhuque AI', model: ZHUQUE_MODEL, languages: ['en']},
   winston: {id: 'winston', provider: 'winston-v2', label: 'Winston AI', model: WINSTON_MODEL, languages: [...WINSTON_LANGUAGES]}
 });
 
-export const DEFAULTS = Object.freeze({provider: 'zhuque', enabled: false, posts: true, comments: true, en: true, ar: true, minWords: 10});
+export const DEFAULTS = Object.freeze({provider: 'zhuque', enabled: false, posts: true, comments: true, en: true, minWords: 10});
 
 export function createService(chrome, {production, fetcher = fetch, now = Date.now, timeoutMs = 20000} = {}) {
   let state, serial = Promise.resolve(), epoch = 0, running = 0, setupController;
@@ -34,6 +34,7 @@ export function createService(chrome, {production, fetcher = fetch, now = Date.n
     ]);
 
     const settings = {...DEFAULTS, ...local.settings};
+    delete settings.ar;
     if (!providerConfig(settings.provider)) settings.provider = 'zhuque';
 
     const pins = {...(local.providerPins || {})};
@@ -226,7 +227,7 @@ export function createService(chrome, {production, fetcher = fetch, now = Date.n
         }
         next.provider = input.provider;
       }
-      for (const key of ['enabled', 'posts', 'comments', 'en', 'ar']) if (typeof input?.[key] === 'boolean') next[key] = input[key];
+      for (const key of ['enabled', 'posts', 'comments', 'en']) if (typeof input?.[key] === 'boolean') next[key] = input[key];
       if (input?.minWords !== undefined) {
         const minWords = Number(input.minWords);
         if (!Number.isInteger(minWords) || minWords < 1 || minWords > 100) throw new DetectorError('invalid_request', 'Minimum words must be between 1 and 100.');
@@ -245,20 +246,21 @@ export function createService(chrome, {production, fetcher = fetch, now = Date.n
   function localLanguage(text, detection, provider) {
     const config = providerConfig(provider);
     const detected = detectedLanguage(detection, config.languages);
-    if (detected.reliable) return detected.supported ? detected.language : '__unsupported__';
 
     if (provider === 'zhuque') {
-      const arabic = (text.match(/\p{Script=Arabic}/gu) || []).length;
-      const latin = (text.match(/\p{Script=Latin}/gu) || []).length;
-      if (arabic && arabic >= latin) return 'ar';
-      if (latin) return 'en';
+      // Strict English-only policy:
+      // Zhuque receives text only when Chrome reliably identifies English.
+      // No Latin-script fallback is allowed.
+      return detected.reliable && detected.language === 'en' ? 'en' : '__unsupported__';
     }
+
+    if (detected.reliable) return detected.supported ? detected.language : '__unsupported__';
     return null;
   }
 
   function providerLanguageEnabled(provider, language) {
     if (provider !== 'zhuque') return true;
-    return language ? !!state.settings[language] : true;
+    return language === 'en' && !!state.settings.en;
   }
 
   async function submit(message, sender) {
@@ -272,7 +274,7 @@ export function createService(chrome, {production, fetcher = fetch, now = Date.n
 
     const text = normalizeText(message.text);
     const tokens = tokenCount(text);
-    if (!text || tokens === 0 || tokens < state.settings.minWords) return {ok: true, status: 'insufficient', language: /\p{Script=Arabic}/u.test(text) ? 'ar' : 'en'};
+    if (!text || tokens === 0 || tokens < state.settings.minWords) return {ok: true, status: 'insufficient', language: 'en'};
     if (text.length > MAX_TEXT) return {ok: true, status: 'too_long'};
 
     const provider = activeProvider();

@@ -7,7 +7,7 @@ Supported providers
 Zhuque AI through Tencent EdgeOne Makers
 Endpoint: https://ai-gateway.edgeone.link/v1/providers/zhuque-text/classify
 Zhuque output: Human, AI and Suspected AI
-The extension currently enables English and Arabic when Zhuque is selected.
+When Zhuque is selected, the extension sends text only when Chrome reliably identifies it as English. Unconfirmed or non-English text is skipped.
 
 Winston AI v2
 Endpoint: https://api.gowinston.ai/v2/ai-content-detection

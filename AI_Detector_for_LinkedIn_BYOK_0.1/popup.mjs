@@ -1,5 +1,5 @@
 const $ = id => document.getElementById(id);
-const fields = ['enabled', 'posts', 'comments', 'en', 'ar'];
+const fields = ['enabled', 'posts', 'comments', 'en'];
 let status, busy = false;
 
 const notice = text => {$('notice').textContent = text;};
@@ -39,7 +39,7 @@ function controls() {
   $('providerZhuque').disabled = busy || providerLocked;
   $('providerWinston').disabled = busy || providerLocked;
   for (const id of fields) {
-    const providerDisabled = ['en', 'ar'].includes(id) && provider === 'winston';
+    const providerDisabled = id === 'en' && provider === 'winston';
     $(id).disabled = busy || providerDisabled || (id === 'enabled' && !status?.settings.connected);
   }
   $('minWords').disabled = busy;
