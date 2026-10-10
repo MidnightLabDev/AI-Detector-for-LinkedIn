@@ -223,16 +223,6 @@ This release analyzes English text only.
 
 Images, audio, and video are not analyzed.
 
-## Platform notice
-
-LinkedIn publishes rules concerning browser extensions and third party software that scrape content, modify the LinkedIn experience, or automate activity.
-
-Users and distributors of this project should review the current LinkedIn User Agreement and LinkedIn Help guidance before using or publishing the extension.
-
-LinkedIn guidance:
-
-https://www.linkedin.com/help/linkedin/answer/a1341387/prohibited-software-and-extensions
-
 ## Project status
 
 Version 0.1 is an experimental public release.
@@ -284,9 +274,3 @@ https://www.linkedin.com/help/linkedin/answer/a1341387/prohibited-software-and-e
 Chrome extension documentation:
 
 https://developer.chrome.com/docs/extensions/
-
-## Author
-
-Created by **Mayas Ötegen**
-
-https://www.midnightlab.dev/
